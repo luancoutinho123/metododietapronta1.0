@@ -3,160 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Montar Dieta - Café da Manhã</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #1FA64A;
-            --primary-hover: #178a3d;
-            --bg-color: #f8f9fa;
-            --card-bg: #ffffff;
-            --text-main: #333333;
-            --text-secondary: #666666;
-            --border-color: #eeeeee;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-
-        body {
-            background-color: var(--bg-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        header { text-align: center; margin-bottom: 30px; }
-        header h1 { font-size: 2rem; color: var(--text-main); font-weight: 700; }
-        header p { color: var(--text-secondary); margin-top: 5px; }
-
-        .container {
-            background: var(--card-bg);
-            width: 100%;
-            max-width: 500px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            padding: 32px;
-        }
-
-        .header-secao {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-
-        .header-secao h2 { font-size: 1.25rem; font-weight: 600; }
-        .counter { color: var(--primary-color); font-weight: 700; }
-
-        .grid-alimentos {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 30px;
-        }
-
-        .card-item {
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            position: relative;
-        }
-
-        .card-item.selected {
-            border-color: var(--primary-color);
-            background-color: #f0fff4;
-        }
-
-        .card-item .icon { font-size: 30px; margin-bottom: 10px; display: block; }
-        .card-item .label { font-size: 0.9rem; font-weight: 600; color: var(--text-main); }
-
-        .btn-submit {
-            width: 100%;
-            padding: 16px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .btn-submit:hover { background-color: var(--primary-hover); }
-
-        @media (max-width: 400px) {
-            .grid-alimentos { grid-template-columns: 1fr; }
-        }
-    </style>
+    <title>Dieta Pronta - Opções</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style> body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; } </style>
 </head>
-<body>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-2xl bg-white rounded-[20px] shadow-sm p-8">
+        <a href="lanche_selecao.html" class="border-2 border-gray-100 rounded-2xl p-6 flex justify-between items-center hover:bg-gray-50 mb-8 transition-all">
+            <div class="flex items-center gap-4">
+                <span class="text-3xl">🍎</span>
+                <div>
+                    <h3 class="font-bold text-gray-800">Lanche da Manhã (Opcional)</h3>
+                    <p class="text-sm text-gray-500">Clique para expandir e adicionar</p>
+                </div>
+            </div>
+            <span class="text-2xl text-gray-300">+</span>
+        </a>
 
-    <header>
-        <h1>Montar Dieta</h1>
-        <p>Escolha seus alimentos preferidos</p>
-    </header>
-
-    <div class="container">
-        <div class="header-secao">
-            <h2>🍞 Café da Manhã</h2>
-            <div class="counter"><span id="count">0</span> / 3</div>
+        <div class="mb-10">
+            <h3 class="font-bold text-gray-800 mb-4 text-lg">🍫 Chocolate</h3>
+            <p class="text-gray-500 mb-4">Deseja incluir chocolate?</p>
+            <a href="chocolate.html" class="block w-full p-4 border-2 border-gray-100 rounded-xl text-gray-700 relative">
+                Selecione uma opção...
+                <span class="absolute right-4">▼</span>
+            </a>
         </div>
 
-        <div class="grid-alimentos">
-            <div class="card-item" onclick="toggleSelect(this, 'Pão + Frango')">
-                <span class="icon">🥖</span>
-                <div class="label">Pão + Frango</div>
-            </div>
-            <div class="card-item" onclick="toggleSelect(this, 'Pão + Ovo')">
-                <span class="icon">🍳</span>
-                <div class="label">Pão + Ovo</div>
-            </div>
-            <div class="card-item" onclick="toggleSelect(this, 'Banana')">
-                <span class="icon">🍌</span>
-                <div class="label">Banana</div>
-            </div>
-            <div class="card-item" onclick="toggleSelect(this, 'Café')">
-                <span class="icon">☕</span>
-                <div class="label">Café</div>
-            </div>
+        <div class="flex justify-between">
+            <a href="index.html" class="px-8 py-3 bg-gray-100 text-gray-600 rounded-xl font-bold">Voltar</a>
+            <button class="px-10 py-3 bg-green-500 text-white rounded-xl font-bold">Finalizar</button>
         </div>
-
-        <button class="btn-submit" onclick="finalizar()">Finalizar Escolha</button>
     </div>
-
-    <script>
-        let selecionados = [];
-
-        function toggleSelect(element, nome) {
-            if (element.classList.contains('selected')) {
-                element.classList.remove('selected');
-                selecionados = selecionados.filter(i => i !== nome);
-            } else {
-                if (selecionados.length < 3) {
-                    element.classList.add('selected');
-                    selecionados.push(nome);
-                } else {
-                    alert("Selecione no máximo 3!");
-                }
-            }
-            document.getElementById('count').innerText = selecionados.length;
-        }
-
-        function finalizar() {
-            if (selecionados.length === 0) {
-                alert("Selecione pelo menos um item!");
-                return;
-            }
-            localStorage.setItem('escolhasCafe', JSON.stringify(selecionados));
-            alert("Muito bem! Escolhas salvas. Agora você pode criar a página de Almoço!");
-        }
-    </script>
 </body>
 </html>
