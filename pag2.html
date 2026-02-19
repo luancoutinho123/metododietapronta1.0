@@ -35,7 +35,7 @@
         .container {
             background: var(--card-bg);
             width: 100%;
-            max-width: 600px;
+            max-width: 500px;
             border-radius: 16px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
             padding: 32px;
@@ -44,18 +44,16 @@
         .header-secao {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
+            align-items: center;
             margin-bottom: 24px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 15px;
         }
 
         .header-secao h2 { font-size: 1.25rem; font-weight: 600; }
-        .counter { color: var(--primary-color); font-weight: 700; font-size: 0.9rem; }
+        .counter { color: var(--primary-color); font-weight: 700; }
 
         .grid-alimentos {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 12px;
             margin-bottom: 30px;
         }
@@ -63,42 +61,20 @@
         .card-item {
             border: 2px solid var(--border-color);
             border-radius: 12px;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
             position: relative;
-            background: white;
         }
-
-        .card-item:hover { border-color: #ccc; }
 
         .card-item.selected {
             border-color: var(--primary-color);
             background-color: #f0fff4;
-            transform: translateY(-2px);
         }
 
-        .card-item .icon { font-size: 28px; margin-bottom: 8px; display: block; }
-        .card-item .label { font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
-
-        /* Checkmark customizado */
-        .checkmark {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            width: 18px;
-            height: 18px;
-            background-color: var(--border-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 10px;
-        }
-
-        .card-item.selected .checkmark { background-color: var(--primary-color); }
+        .card-item .icon { font-size: 30px; margin-bottom: 10px; display: block; }
+        .card-item .label { font-size: 0.9rem; font-weight: 600; color: var(--text-main); }
 
         .btn-submit {
             width: 100%;
@@ -110,15 +86,13 @@
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: 0.2s;
         }
 
-        .btn-submit:hover { background-color: var(--primary-hover); transform: scale(1.01); }
-        .btn-submit:active { transform: scale(0.99); }
+        .btn-submit:hover { background-color: var(--primary-hover); }
 
-        @media (max-width: 480px) {
-            .grid-alimentos { grid-template-columns: repeat(2, 1fr); }
-            .container { padding: 20px; }
+        @media (max-width: 400px) {
+            .grid-alimentos { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -131,83 +105,57 @@
 
     <div class="container">
         <div class="header-secao">
-            <div>
-                <h2>🍞 Café da Manhã</h2>
-                <p style="font-size: 0.8rem; color: #888;">Selecione exatamente 3 itens</p>
-            </div>
+            <h2>🍞 Café da Manhã</h2>
             <div class="counter"><span id="count">0</span> / 3</div>
         </div>
 
         <div class="grid-alimentos">
             <div class="card-item" onclick="toggleSelect(this, 'Pão + Frango')">
-                <div class="checkmark">✓</div>
                 <span class="icon">🥖</span>
                 <div class="label">Pão + Frango</div>
             </div>
-
             <div class="card-item" onclick="toggleSelect(this, 'Pão + Ovo')">
-                <div class="checkmark">✓</div>
                 <span class="icon">🍳</span>
                 <div class="label">Pão + Ovo</div>
             </div>
-
-            <div class="card-item" onclick="toggleSelect(this, 'Pão + Queijo')">
-                <div class="checkmark">✓</div>
-                <span class="icon">🧀</span>
-                <div class="label">Pão + Queijo</div>
-            </div>
-
-            <div class="card-item" onclick="toggleSelect(this, 'Tapioca de Queijo')">
-                <div class="checkmark">✓</div>
-                <span class="icon">🥪</span>
-                <div class="label">Tapioca de Queijo</div>
-            </div>
-
             <div class="card-item" onclick="toggleSelect(this, 'Banana')">
-                <div class="checkmark">✓</div>
                 <span class="icon">🍌</span>
                 <div class="label">Banana</div>
             </div>
-
             <div class="card-item" onclick="toggleSelect(this, 'Café')">
-                <div class="checkmark">✓</div>
                 <span class="icon">☕</span>
                 <div class="label">Café</div>
             </div>
         </div>
 
-        <button class="btn-submit" onclick="proximaPagina()">Continuar →</button>
+        <button class="btn-submit" onclick="finalizar()">Finalizar Escolha</button>
     </div>
 
     <script>
-        let itensSelecionados = [];
+        let selecionados = [];
 
-        function toggleSelect(element, nomeItem) {
+        function toggleSelect(element, nome) {
             if (element.classList.contains('selected')) {
                 element.classList.remove('selected');
-                itensSelecionados = itensSelecionados.filter(item => item !== nomeItem);
+                selecionados = selecionados.filter(i => i !== nome);
             } else {
-                if (itensSelecionados.length < 3) {
+                if (selecionados.length < 3) {
                     element.classList.add('selected');
-                    itensSelecionados.push(nomeItem);
+                    selecionados.push(nome);
                 } else {
-                    alert("Você já selecionou 3 itens!");
+                    alert("Selecione no máximo 3!");
                 }
             }
-            document.getElementById('count').innerText = itensSelecionados.length;
+            document.getElementById('count').innerText = selecionados.length;
         }
 
-        function proximaPagina() {
-            if (itensSelecionados.length < 3) {
-                alert("Por favor, selecione 3 itens antes de continuar.");
+        function finalizar() {
+            if (selecionados.length === 0) {
+                alert("Selecione pelo menos um item!");
                 return;
             }
-            
-            // Salvando no navegador
-            localStorage.setItem('cafeDaManha', JSON.stringify(itensSelecionados));
-            
-            alert("Café da manhã salvo! Indo para o Almoço...");
-            // window.location.href = "almoco.html"; // Comentei para você testar primeiro
+            localStorage.setItem('escolhasCafe', JSON.stringify(selecionados));
+            alert("Muito bem! Escolhas salvas. Agora você pode criar a página de Almoço!");
         }
     </script>
 </body>
