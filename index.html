@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montar Dieta - Personalizado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1FA64A;
+            --primary-hover: #178a3d;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-secondary: #666666;
+            --border-color: #dddddd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Cabeçalho */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        /* Card do Formulário */
+        .card {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 450px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        /* Inputs e Selects */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        input[type="number"], select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary-color);
+        }
+
+        /* Toggle de Sexo */
+        .gender-selection {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .gender-btn {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .gender-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Botão Final */
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.1s, background-color 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        /* Mobile */
+        @media (max-width: 480px) {
+            .card {
+                width: 95%;
+                padding: 24px;
+            }
+            
+            header h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Montar Dieta</h1>
+        <p>Crie sua dieta personalizada</p>
+    </header>
+
+    <main class="card">
+        <h2 class="section-title">Medidas Corporais</h2>
+        <p class="section-subtitle">Informe suas medidas para começar</p>
+
+        <form id="dietForm">
+            <div class="form-group">
+                <input type="number" id="peso" placeholder="Peso (kg)" min="1" required>
+            </div>
+
+            <div class="form-group">
+                <input type="number" id="altura" placeholder="Altura (cm)" min="1" required>
+            </div>
+
+            <div class="form-group">
+                <input type="number" id="idade" placeholder="Idade (anos)" min="1" required>
+            </div>
+
+            <div class="form-group">
+                <select id="objetivo" required>
+                    <option value="" disabled selected>Objetivo</option>
+                    <option value="emagrecimento">Emagrecimento</option>
+                    <option value="definicao">Definição Muscular</option>
+                    <option value="massa">Ganho de Massa</option>
+                    <option value="emagrecer_massa">Emagrecer + Ganho de Massa</option>
+                    <option value="definicao_massa">Definição + Ganho de Massa</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <select id="calorias" required>
+                    <option value="" disabled selected>Calorias desejadas por dia</option>
+                    <option value="nao_sei">Não sei dizer</option>
+                    <option value="1200">1200 calorias</option>
+                    <option value="1400">1400 calorias</option>
+                    <option value="1600">1600 calorias</option>
+                    <option value="1800">1800 calorias</option>
+                    <option value="2000">2000 calorias</option>
+                    <option value="2200">2200 calorias</option>
+                    <option value="2400">2400 calorias</option>
+                    <option value="2600">2600 calorias</option>
+                    <option value="2800">2800 calorias</option>
+                    <option value="3000">3000 calorias</option>
+                </select>
+            </div>
+
+            <div class="gender-selection">
+                <div class="gender-btn" id="btnMasc" onclick="selectGender('Masculino')">Masculino</div>
+                <div class="gender-btn" id="btnFem" onclick="selectGender('Feminino')">Feminino</div>
+            </div>
+
+            <input type="hidden" id="sexo" value="">
+
+            <button type="submit" class="btn-submit">
+                Continuar &rarr;
+            </button>
+        </form>
+    </main>
+
+    <script>
+        let selectedSex = "";
+
+        function selectGender(sex) {
+            selectedSex = sex;
+            document.getElementById('sexo').value = sex;
+            
+            // Atualiza UI
+            document.getElementById('btnMasc').classList.remove('active');
+            document.getElementById('btnFem').classList.remove('active');
+
+            if (sex === 'Masculino') {
+                document.getElementById('btnMasc').classList.add('active');
+            } else {
+                document.getElementById('btnFem').classList.add('active');
+            }
+        }
+
+        document.getElementById('dietForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!selectedSex) {
+                alert("Por favor, selecione o sexo.");
+                return;
+            }
+
+            const formData = {
+                peso: document.getElementById('peso').value,
+                altura: document.getElementById('altura').value,
+                idade: document.getElementById('idade').value,
+                objetivo: document.getElementById('objetivo').value,
+                calorias: document.getElementById('calorias').value,
+                sexo: selectedSex
+            };
+
+            console.log("Dados enviados:", formData);
+            alert("Formulário enviado com sucesso! Verifique o console.");
+        });
+    </script>
+</body>
+</html>
