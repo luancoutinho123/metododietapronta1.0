@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Montar Dieta - Personalizado</title>
+    <title>Montar Dieta - Passo 1</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -33,7 +33,6 @@
             padding: 20px;
         }
 
-        /* Cabeçalho */
         header {
             text-align: center;
             margin-bottom: 30px;
@@ -50,7 +49,6 @@
             margin-top: 5px;
         }
 
-        /* Card do Formulário */
         .card {
             background: var(--card-bg);
             width: 100%;
@@ -72,7 +70,6 @@
             margin-bottom: 24px;
         }
 
-        /* Inputs e Selects */
         .form-group {
             margin-bottom: 16px;
         }
@@ -91,7 +88,6 @@
             border-color: var(--primary-color);
         }
 
-        /* Toggle de Sexo */
         .gender-selection {
             display: flex;
             gap: 10px;
@@ -116,7 +112,6 @@
             border-color: var(--primary-color);
         }
 
-        /* Botão Final */
         .btn-submit {
             width: 100%;
             padding: 16px;
@@ -142,16 +137,8 @@
             transform: scale(0.98);
         }
 
-        /* Mobile */
         @media (max-width: 480px) {
-            .card {
-                width: 95%;
-                padding: 24px;
-            }
-            
-            header h1 {
-                font-size: 1.75rem;
-            }
+            .card { width: 90%; padding: 24px; }
         }
     </style>
 </head>
@@ -215,7 +202,7 @@
             <input type="hidden" id="sexo" value="">
 
             <button type="submit" class="btn-submit">
-                Continuar &rarr;
+                Continuar →
             </button>
         </form>
     </main>
@@ -226,8 +213,6 @@
         function selectGender(sex) {
             selectedSex = sex;
             document.getElementById('sexo').value = sex;
-            
-            // Atualiza UI
             document.getElementById('btnMasc').classList.remove('active');
             document.getElementById('btnFem').classList.remove('active');
 
@@ -246,6 +231,7 @@
                 return;
             }
 
+            // Captura os dados para salvar
             const formData = {
                 peso: document.getElementById('peso').value,
                 altura: document.getElementById('altura').value,
@@ -255,8 +241,11 @@
                 sexo: selectedSex
             };
 
-            console.log("Dados enviados:", formData);
-            alert("Formulário enviado com sucesso! Verifique o console.");
+            // Salva no navegador (LocalStorage)
+            localStorage.setItem('usuarioMedidas', JSON.stringify(formData));
+
+            // REDIRECIONAMENTO PARA A PRÓXIMA PÁGINA
+            window.location.href = "pag2.html";
         });
     </script>
 </body>
