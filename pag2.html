@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montar Dieta - Café da Manhã</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1FA64A;
+            --primary-hover: #178a3d;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-secondary: #666666;
+            --border-color: #eeeeee;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+
+        body {
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header { text-align: center; margin-bottom: 30px; }
+        header h1 { font-size: 2rem; color: var(--text-main); font-weight: 700; }
+        header p { color: var(--text-secondary); margin-top: 5px; }
+
+        .container {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 600px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+        }
+
+        .header-secao {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .header-secao h2 { font-size: 1.25rem; font-weight: 600; }
+        .counter { color: var(--primary-color); font-weight: 700; font-size: 0.9rem; }
+
+        .grid-alimentos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .card-item {
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            background: white;
+        }
+
+        .card-item:hover { border-color: #ccc; }
+
+        .card-item.selected {
+            border-color: var(--primary-color);
+            background-color: #f0fff4;
+            transform: translateY(-2px);
+        }
+
+        .card-item .icon { font-size: 28px; margin-bottom: 8px; display: block; }
+        .card-item .label { font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
+
+        /* Checkmark customizado */
+        .checkmark {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 18px;
+            height: 18px;
+            background-color: var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+        }
+
+        .card-item.selected .checkmark { background-color: var(--primary-color); }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-submit:hover { background-color: var(--primary-hover); transform: scale(1.01); }
+        .btn-submit:active { transform: scale(0.99); }
+
+        @media (max-width: 480px) {
+            .grid-alimentos { grid-template-columns: repeat(2, 1fr); }
+            .container { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Montar Dieta</h1>
+        <p>Escolha seus alimentos preferidos</p>
+    </header>
+
+    <div class="container">
+        <div class="header-secao">
+            <div>
+                <h2>🍞 Café da Manhã</h2>
+                <p style="font-size: 0.8rem; color: #888;">Selecione exatamente 3 itens</p>
+            </div>
+            <div class="counter"><span id="count">0</span> / 3</div>
+        </div>
+
+        <div class="grid-alimentos">
+            <div class="card-item" onclick="toggleSelect(this, 'Pão + Frango')">
+                <div class="checkmark">✓</div>
+                <span class="icon">🥖</span>
+                <div class="label">Pão + Frango</div>
+            </div>
+
+            <div class="card-item" onclick="toggleSelect(this, 'Pão + Ovo')">
+                <div class="checkmark">✓</div>
+                <span class="icon">🍳</span>
+                <div class="label">Pão + Ovo</div>
+            </div>
+
+            <div class="card-item" onclick="toggleSelect(this, 'Pão + Queijo')">
+                <div class="checkmark">✓</div>
+                <span class="icon">🧀</span>
+                <div class="label">Pão + Queijo</div>
+            </div>
+
+            <div class="card-item" onclick="toggleSelect(this, 'Tapioca de Queijo')">
+                <div class="checkmark">✓</div>
+                <span class="icon">🥪</span>
+                <div class="label">Tapioca de Queijo</div>
+            </div>
+
+            <div class="card-item" onclick="toggleSelect(this, 'Banana')">
+                <div class="checkmark">✓</div>
+                <span class="icon">🍌</span>
+                <div class="label">Banana</div>
+            </div>
+
+            <div class="card-item" onclick="toggleSelect(this, 'Café')">
+                <div class="checkmark">✓</div>
+                <span class="icon">☕</span>
+                <div class="label">Café</div>
+            </div>
+        </div>
+
+        <button class="btn-submit" onclick="proximaPagina()">Continuar →</button>
+    </div>
+
+    <script>
+        let itensSelecionados = [];
+
+        function toggleSelect(element, nomeItem) {
+            if (element.classList.contains('selected')) {
+                element.classList.remove('selected');
+                itensSelecionados = itensSelecionados.filter(item => item !== nomeItem);
+            } else {
+                if (itensSelecionados.length < 3) {
+                    element.classList.add('selected');
+                    itensSelecionados.push(nomeItem);
+                } else {
+                    alert("Você já selecionou 3 itens!");
+                }
+            }
+            document.getElementById('count').innerText = itensSelecionados.length;
+        }
+
+        function proximaPagina() {
+            if (itensSelecionados.length < 3) {
+                alert("Por favor, selecione 3 itens antes de continuar.");
+                return;
+            }
+            
+            // Salvando no navegador
+            localStorage.setItem('cafeDaManha', JSON.stringify(itensSelecionados));
+            
+            alert("Café da manhã salvo! Indo para o Almoço...");
+            // window.location.href = "almoco.html"; // Comentei para você testar primeiro
+        }
+    </script>
+</body>
+</html>
