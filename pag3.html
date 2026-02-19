@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecionar Lanches</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style> body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; } </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-4xl bg-white rounded-[20px] shadow-sm p-8 flex flex-col min-h-[600px]">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">🍎 Lanche da Manhã</h1>
+        <p class="text-gray-500 mb-8">Escolha frutas ou suplementos</p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+            <label class="border-2 border-gray-100 p-4 rounded-xl cursor-pointer text-center has-[:checked]:border-green-500">
+                <input type="checkbox" class="hidden">
+                <span class="text-3xl block">🍎</span> Maçã
+            </label>
+            <label class="border-2 border-gray-100 p-4 rounded-xl cursor-pointer text-center has-[:checked]:border-green-500">
+                <input type="checkbox" class="hidden">
+                <span class="text-3xl block">🍌</span> Banana
+            </label>
+            <label class="border-2 border-gray-100 p-4 rounded-xl cursor-pointer text-center has-[:checked]:border-green-500">
+                <input type="checkbox" class="hidden">
+                <span class="text-3xl block">🥤</span> Whey
+            </label>
+        </div>
+
+        <div class="mt-auto flex flex-col items-center">
+            <a href="lanche_resumo.html" class="text-gray-400 underline mb-6">Não quero lanche da manhã</a>
+            <div class="w-full flex justify-between">
+                <a href="lanche_resumo.html" class="px-8 py-3 bg-gray-100 text-gray-600 rounded-xl font-bold">Voltar</a>
+                <a href="lanche_resumo.html" class="px-10 py-3 bg-green-500 text-white rounded-xl font-bold">Confirmar</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
